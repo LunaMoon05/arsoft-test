@@ -1,0 +1,16 @@
+@import '../../../global.scss';
+
+.btn {
+  background-color: $main;
+  width: 200px;
+  padding: .5rem .8rem;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  border: 1px solid black;
+  font-weight: bold;
+  transition: .1s ease-out box-shadow;
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 119, 255, 1);
+  }
+}
