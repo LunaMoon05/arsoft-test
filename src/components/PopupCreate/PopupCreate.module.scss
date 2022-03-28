@@ -1,0 +1,42 @@
+.create {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem 2rem;
+  border: 1px solid black;
+  background-color: #ccc;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.form {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btnsWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  &:not(:last-child) {
+    margin-bottom: .6rem;
+  }
+}
+
+.label {
+  margin-bottom: .4rem;
+  padding-left: .2rem;
+  font-size: 17px;
+}
+
+.input {
+  font-size: 19px;
+  padding: .5rem;
+}
