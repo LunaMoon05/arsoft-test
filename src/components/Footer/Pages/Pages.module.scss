@@ -1,0 +1,37 @@
+.pages {
+  display: flex;
+  max-width: 500px;
+}
+
+.titleWrapper {
+  padding: .4rem 0;
+  border: 1px solid black;
+}
+
+.title {
+  position: relative;
+  font-size: 17px;
+  padding: 0 1.8rem;
+}
+
+.widget {
+  display: flex;
+}
+
+.btn {
+  width: 25px;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  font-size: 17px;
+  align-items: center;
+  justify-content: center;
+}
+
+.page {
+  width: 32px;
+  height: 100%;
+  font-size: 17px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
