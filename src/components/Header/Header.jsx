@@ -1,32 +1,39 @@
 import React from "react";
 import s from "./Header.module.scss";
+import grow from '../../helpers/grow.module.scss'
 import { ArrowSort } from './../common/ArrowSort';
 
 export const Header = () => {
   const btnsArr = [
     {
       text: "Имя",
-      growClass: s.name
+      growClass: grow.name,
+      sorting: true,
     },
     {
       text: "Фамилия",
-      growClass: s.surname
+      growClass: grow.surname,
+      sorting: true,
     },
     {
       text: "Username",
-      growClass: s.username
+      growClass: grow.username,
+      sorting: true,
     },
     {
       text: "Роль",
-      growClass: s.role
+      growClass: grow.role,
+      sorting: true,
     },
     {
       text: "Организация",
-      growClass: s.company
+      growClass: grow.company,
+      sorting: true,
     },
     {
       text: "Изображения",
-      growClass: s.img
+      growClass: grow.img,
+      sorting: false,
     },
   ];
   return (
@@ -34,10 +41,10 @@ export const Header = () => {
       <ul className={s.list}>
         {btnsArr.map(item => {
           return (
-            <li className={s.item + ' ' + item.growClass}>
+            <li className={item.growClass}>
               <button className={s.btn}>
                 <span>{item.text}</span>
-                <ArrowSort />
+                {item.sorting && <ArrowSort />}
               </button>
             </li>
           );
