@@ -1,0 +1,59 @@
+@import '../../global.scss';
+
+.header {
+  width: 100%;
+  border-bottom: 2px solid black;
+}
+
+.list {
+  display: flex;
+  padding-left: 2rem;
+  padding-right: .15rem;
+  padding-bottom: .2rem;
+}
+
+.item {
+}
+
+.name {
+  flex-grow: .1;
+}
+
+.surname {
+  flex-grow: .1;
+}
+
+.username {
+  flex-grow: .1;
+}
+
+.role {
+  flex-grow: .3;
+}
+
+.company {
+  flex-grow: .2;
+}
+
+.img {
+  flex-grow: .2;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 17px;
+  span {
+    margin-right: .3rem;
+  }
+  div {
+    opacity: 0;
+    transition: .08s ease-in-out opacity;
+  }
+  &:hover {
+    div {
+      opacity: 1;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header } from '../Header/Header'
-import s from './Main.scss'
+import s from './Main.module.scss'
 
 export const Main = () => {
   return (
