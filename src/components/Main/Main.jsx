@@ -11,6 +11,7 @@ import s from "./Main.module.scss";
 export const Main = () => {
   const [deleteId, setDeleteId] = useState(null);
   const [isCreating, setIsCreating] = useState(false);
+  const [editId, setEditId] = useState(2);
   const [users, setUsers] = useState([]);
   const [initialUsers, setInitialUsers] = useState([]); // изначальный массив с пользователями(без сортировки), меняется только один раз
   const [token, setToken] = useState(null);
@@ -52,7 +53,7 @@ export const Main = () => {
     <section className={s.main}>
       <div className={s.wrapper}>
         <Header initialUsers={initialUsers} users={users} setUsers={setUsers} />
-        <List page={page} setDeleteId={setDeleteId} users={users} />
+        <List setEditId={setEditId} editId={editId} page={page} setDeleteId={setDeleteId} users={users} />
         <Footer token={token} page={page} setPage={setPage} setIsCreating={setIsCreating} />
         {deleteId && (
           <PopupDelete deleteUser={deleteUser} setDeleteId={setDeleteId} />

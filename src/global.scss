@@ -1,4 +1,11 @@
 $main: #008BF8;
+$red: #C3423F;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
 
 ul li {
   list-style: none;

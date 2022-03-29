@@ -122,7 +122,7 @@ export const PopupCreate = props => {
             <input onChange={birthOnChange} value={birth} placeholder="ДД.ММ.ГГГГ" className={s.input} id='birth' type="text" />
           </div>
           <div className={s.btnsWrapper}>
-            <MainBtn onClick={() => setIsCreating(false)} style={{width: '170px'}} text="Закрыть" />
+            <MainBtn variant='red' onClick={() => setIsCreating(false)} style={{width: '170px'}} text="Закрыть" />
             <MainBtn type='submit' style={{width: '170px'}} text="Сохранить" />
           </div>
         </form>

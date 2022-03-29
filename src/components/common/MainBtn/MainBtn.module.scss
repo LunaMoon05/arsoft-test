@@ -13,4 +13,10 @@
   &:hover {
     box-shadow: 0 0 10px rgba(0, 119, 255, 1);
   }
+  &Red {
+    background-color: $red;
+    &:hover {
+      box-shadow: 0 0 10px $red;
+    }
+  }
 }

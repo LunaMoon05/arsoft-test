@@ -1,7 +1,9 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 1.3rem 0;
+  border-bottom: 2px solid black;
+  padding: 2.2rem 0;
+  height: 105px;
   span {
     font-size: 17px;
   }
@@ -21,4 +23,22 @@
     height: 100%;
     max-width: 40px;
   }
+}
+
+.error {
+  position: absolute;
+  bottom: -20px;
+  font-size: 12px !important;
+  color: red;
+}
+
+.select {
+  width: 160px;
+  font-size: 13px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
