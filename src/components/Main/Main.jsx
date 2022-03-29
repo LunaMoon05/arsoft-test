@@ -14,9 +14,10 @@ export const Main = () => {
   const [users, setUsers] = useState([]);
   const [initialUsers, setInitialUsers] = useState([]); // изначальный массив с пользователями(без сортировки), меняется только один раз
   const [token, setToken] = useState(null);
+  const [page, setPage] = useState(1)
   const getUsers = () => {
     axios
-      .get("account", {}, { headers: { Authorization: token } })
+      .get(`account/api?page=${page - 1}&size=3`, {}, { headers: { Authorization: token } })
       .then((response) => {
         const newUsers = response.data.map((item) => {
           return {
@@ -33,6 +34,9 @@ export const Main = () => {
       });
   };
   useEffect(() => {
+    getUsers()
+  }, [page])
+  useEffect(() => {
     getToken().then((resp) => {
       setToken(resp);
     });
@@ -48,8 +52,8 @@ export const Main = () => {
     <section className={s.main}>
       <div className={s.wrapper}>
         <Header initialUsers={initialUsers} users={users} setUsers={setUsers} />
-        <List setDeleteId={setDeleteId} users={users} />
-        <Footer setIsCreating={setIsCreating} />
+        <List page={page} setDeleteId={setDeleteId} users={users} />
+        <Footer token={token} page={page} setPage={setPage} setIsCreating={setIsCreating} />
         {deleteId && (
           <PopupDelete deleteUser={deleteUser} setDeleteId={setDeleteId} />
         )}

@@ -3,11 +3,12 @@ import s from "./List.module.scss";
 import { ListItem } from "./ListItem/ListItem";
 
 export const List = props => {
-  const {users, setDeleteId} = props
+  const {users, page, setDeleteId} = props
+  const position = (page - 1) * 3
   return (
     <div className={s.list}>
-      {users.map(user => {
-        return <ListItem setDeleteId={setDeleteId} key={user.id} data={user} />
+      {users.map((user, index) => {
+        return <ListItem position={position + (index + 1)} setDeleteId={setDeleteId} key={user.id} data={user} />
       })}
     </div>
   );
