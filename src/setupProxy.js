@@ -7,7 +7,19 @@ module.exports = function(app) {
     })
   );
   app.use(
-    createProxyMiddleware('/auth/login', {
+    createProxyMiddleware('/auth', {
+      target: 'http://23.111.202.224:8093',
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    createProxyMiddleware('/auth/reg', {
+      target: 'http://23.111.202.224:8093',
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    createProxyMiddleware('/organization', {
       target: 'http://23.111.202.224:8093',
       changeOrigin: true,
     })

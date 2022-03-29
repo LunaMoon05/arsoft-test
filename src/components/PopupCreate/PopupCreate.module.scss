@@ -16,6 +16,16 @@
   margin-bottom: 2rem;
 }
 
+.error {
+  font-size: 12px;
+  color: red;
+}
+
+.selectError {
+  border-radius: 5px;
+  border: 1px solid red;
+}
+
 .btnsWrapper {
   display: flex;
   justify-content: space-between;
@@ -39,4 +49,5 @@
 .input {
   font-size: 19px;
   padding: .5rem;
+  border: 1px solid transparent;
 }

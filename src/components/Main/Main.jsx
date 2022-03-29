@@ -53,7 +53,7 @@ export const Main = () => {
         {deleteId && (
           <PopupDelete deleteUser={deleteUser} setDeleteId={setDeleteId} />
         )}
-        {isCreating && <PopupCreate setIsCreating={setIsCreating} />}
+        {isCreating && <PopupCreate token={token} setIsCreating={setIsCreating} />}
       </div>
     </section>
   );
