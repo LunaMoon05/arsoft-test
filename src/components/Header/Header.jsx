@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Header.module.scss";
 import grow from '../../helpers/grow.module.scss'
 import { ArrowSort } from './../common/ArrowSort';
+import { HeaderItem } from "./HeaderItem";
 
 export const Header = () => {
   const btnsArr = [
@@ -41,12 +42,7 @@ export const Header = () => {
       <ul className={s.list}>
         {btnsArr.map(item => {
           return (
-            <li className={item.growClass}>
-              <button className={s.btn}>
-                <span>{item.text}</span>
-                {item.sorting && <ArrowSort />}
-              </button>
-            </li>
+            <HeaderItem key={item.text} item={item} />
           );
         })}
       </ul>
