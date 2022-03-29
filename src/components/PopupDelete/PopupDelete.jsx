@@ -4,7 +4,7 @@ import s from './PopupDelete.module.scss'
 import { MainBtn } from './../common/MainBtn/MainBtn';
 
 export const PopupDelete = props => {
-  const {setDeleteId} = props
+  const {setDeleteId, deleteUser} = props
   return (
     <Popup>
       <div className={s.delete}>
@@ -13,7 +13,10 @@ export const PopupDelete = props => {
         </span>
         <div className={s.btnsWrapper}>
           <MainBtn onClick={() => setDeleteId(null)} style={{ width: "140px", padding: ".8rem" }} text="Нет" />
-          <MainBtn style={{ width: "140px", padding: ".8rem" }} text="Да" />
+          <MainBtn onClick={() => {
+            deleteUser()
+            setDeleteId(null)
+          }} style={{ width: "140px", padding: ".8rem" }} text="Да" />
         </div>
       </div>
     </Popup>
