@@ -10,14 +10,17 @@ import Select from 'react-select';
 import { useForm } from "react-hook-form";
 import { MainBtn } from "../../common/MainBtn/MainBtn";
 import axios from "axios";
+const JSZip = require("jszip");
+const download = require("downloadjs")
+const zip = new JSZip()
 
 export const ListItem = (props) => {
-  const { style, editId, setEditId, position, setDeleteId, data } = props;
+  const { style, getUsers, token, editId, setEditId, position, setDeleteId, data } = props;
   const schema = yup.object({
     name: yup.string().required('Обязательное поле').min(2, 'Минимум 2 символа').max(20, 'Максимум 20 символов'),
     lastName: yup.string().required('Обязательное поле').min(2, 'Минимум 2 символа').max(20, 'Максимум 20 символов'),
     email: yup.string().required('Обязательное поле').email('Неправильный email').min(2, 'Минимум 10 символов'),
-    role: yup.string().required('Выберите роль')
+    role: yup.string()
   })
   const roles = [
     {
@@ -42,17 +45,33 @@ export const ListItem = (props) => {
   }, [])
   const [selectedRole, setSelectedRole] = useState(data?.role)
   useEffect(() => {
-    setValue('role', selectedRole)
+    setValue('role', selectedRole.value)
   }, [selectedRole])
   const isEdit = editId === position
-  const userRoles = selectedRole === 'Пользователь' ? [{name: 'ROLE_USER'}] : [{name: 'ROLE_USER'}, {name: 'ROLE_ADMIN'}]
+  const userRoles = selectedRole.value === 'Пользователь' ? [{name: "ROLE_USER"}] : [{name: "ROLE_USER"}, {name: "ROLE_ADMIN"}]
   const onSubmit = (formData) => {
-    axios.put('account/edit', {id: data?.id, name: formData?.name, last_name: formData?.lastName, email: formData?.email, roles: userRoles}).then(resp => {
-      console.log('CHANGED!', resp)
+    axios.put('account/edit', {id: data?.id, name: formData?.name, last_name: formData?.lastName, email: formData?.email, roles: userRoles, birth_date: data?.birthDate, company_title: data?.companyTitle}, {headers: {Authorization: token}}).then(resp => {
+      setEditId(null)
+      getUsers()
     })
   }
   const onError = () => {
     console.log('errors', errors)
+  }
+  const downloadScreens = (e) => {
+    e.preventDefault();
+    // const archive = zip.file('archive', 'unicode \xE2\x99\xA5', {binary: true})
+    // archive.files.archive._data.then(resp => {
+    //   console.log('RESPSPP', resp)
+    //   download(resp, 'screenshots.txt')
+    // })
+    // download(archive.files.archive, 'screenshots.txt')
+    // axios.get(`screenshot/arch/${data.id}`, {}, { headers: { Authorization: token } }).then(zipData => {
+    //   const archive = zip.file('archive', zipData.data, {binary: true})
+    //   archive.files.archive._data.then(resp => {
+    //     console.log('resp', [...resp])
+    //   })
+    // })
   }
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} style={style} className={s.item}>
@@ -72,7 +91,7 @@ export const ListItem = (props) => {
           className={grow.img}
         >
           {isEdit ? null :
-          <button style={{ flexGrow: 0.5 }} className={s.btn}>
+          <button onClick={downloadScreens} style={{ flexGrow: 0.5 }} className={s.btn}>
             <img src={downloadIcon} alt="" />
           </button>}
           {isEdit ? null :

@@ -12,7 +12,7 @@ export const PopupDelete = props => {
           Вы действительно хотите удалить пользователя?
         </span>
         <div className={s.btnsWrapper}>
-          <MainBtn onClick={() => setDeleteId(null)} style={{ width: "140px", padding: ".8rem" }} text="Нет" />
+          <MainBtn variant='red' onClick={() => setDeleteId(null)} style={{ width: "140px", padding: ".8rem" }} text="Нет" />
           <MainBtn onClick={() => {
             deleteUser()
             setDeleteId(null)
