@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "./Header.module.scss";
 import grow from "../../helpers/grow.module.scss";
 import { HeaderItem } from "./HeaderItem";

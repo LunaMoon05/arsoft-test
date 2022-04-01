@@ -7,6 +7,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Select from 'react-select';
 import axios from "axios";
+import DatePicker, {setDefaultLocale} from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {ru} from 'date-fns/locale';
+setDefaultLocale(ru)
 
 export const PopupCreate = props => {
   const {setIsCreating, token} = props
@@ -47,31 +51,12 @@ export const PopupCreate = props => {
   const [selectedRole, setSelectedRole] = useState(null)
   const [selectedCompany, setSelectedCompany] = useState(null)
   const [birth, setBirth] = useState('')
-  const birthOnChange = val => {
-    if(val.nativeEvent.inputType === 'deleteContentBackward') {
-      setBirth('')
-      setValue('birth', null)
-    } else {
-        if(val.target.value.length <= 10) {
-          setBirth(val.target.value)
-          setValue('birth', val.target.value)
-        if(val.target.value.length === 2) {
-          setBirth(val.target.value + '.')
-          setValue('birth', val.target.value + '.')
-        } 
-        if(val.target.value.length === 5) {
-          setBirth(val.target.value + '.')
-          setValue('birth', val.target.value + '.')
-        }
-      }
-    }
-  }
   useEffect(() => {
     setValue('company', selectedCompany?.value)
     setValue('role', selectedRole?.value)
   }, [selectedCompany, selectedRole])
   const onSubmit = (data) => {
-    const formattedBirth = `${birth.substring(6, 10)}-${birth.substring(3, 5)}-${birth.substring(0, 2)}T00:00:00.000`
+    const formattedBirth = `${birth.substring(0, 23)}`
     if(data.role === 'Пользователь') {
       axios.post('auth/reg', {
         name: data.name,
@@ -81,6 +66,19 @@ export const PopupCreate = props => {
         email: data.email,
         password: data.password
       }).then(resp => {
+        setIsCreating(false)
+        console.log('resp regist:', resp)
+      })
+    } else if(data.role === 'Админ') {
+      axios.post('auth/reg/admin', {
+        name: data.name,
+        last_name: data.lastName,
+        birth_date: formattedBirth,
+        company_title: data.company, //название существующей компании
+        email: data.email,
+        password: data.password
+      }).then(resp => {
+        setIsCreating(false)
         console.log('resp regist:', resp)
       })
     }
@@ -88,6 +86,7 @@ export const PopupCreate = props => {
   const onError = () => {
     console.log('errors', errors)
   }
+  const [startDate, setStartDate] = useState(new Date());
   return (
     <Popup>
       <div className={s.create}>
@@ -119,7 +118,11 @@ export const PopupCreate = props => {
           </div>
           <div className={s.item}>
             <label className={s.label} htmlFor="birth">Дата рождения: <span className={s.error}>{errors?.birth?.message}</span></label>
-            <input onChange={birthOnChange} value={birth} placeholder="ДД.ММ.ГГГГ" className={s.input} id='birth' type="text" />
+            <DatePicker fixedHeight={290} className={s.datePicker} selected={startDate} onChange={(date) => {
+              setBirth(date?.toISOString())
+              setStartDate(date)
+            }} />
+            <span style={{fontSize: 12, marginTop: 5}}>(*для изменения года используйте текстовое поле)</span>
           </div>
           <div className={s.btnsWrapper}>
             <MainBtn variant='red' onClick={() => setIsCreating(false)} style={{width: '170px'}} text="Закрыть" />
